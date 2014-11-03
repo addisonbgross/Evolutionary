@@ -43,7 +43,7 @@ namespace Generator {
 			string randomChromosome = "";
 			for (int i = 0; i < chromosomeLength; i++) {
 				// rnd.Next(0, 2) generates a random integer that is a 0 or 1
-				randomChromosome = randomChromosome + rnd.Next(0, 2);
+				randomChromosome += rnd.Next(0, 2);
 			}
 			return randomChromosome;
 		}
