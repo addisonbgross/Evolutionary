@@ -9,6 +9,8 @@ namespace Tests
 		[Test()]
 		public void TestCase ()
 		{
+			// YEEEEEEEEEAAAAAHHHHHH
+			Assert.AreEqual (100, 100);
 		}
 	}
 }
