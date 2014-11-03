@@ -7,20 +7,10 @@ namespace Generator {
 	// chromosome. if no input is passed to the constructor, it defaults to 8
 	// characters in length;
 	public class Generator {
-		// is the randomly generated chromosome string
-		private string chromosome;
-	
+		private Random randomNumber = new Random();
+		
 		// Generates a chromosome of length 8
 		public Generator() {
-			this.chromosome = generateChromosome(8);
-		}
-		
-		// Generates a chromosome of length chromosomeLength
-		public Generator(int chromosomeLength) {
-			if (!isMultipleOfFour(chromosomeLength)) {
-				chromosomeLength = roundUpToMultipleOfFour(chromosomeLength);
-			}
-			this.chromosome = generateChromosome(chromosomeLength);
 		}
 		
 		private bool isMultipleOfFour(int input) {
@@ -37,20 +27,22 @@ namespace Generator {
 			return input;
 		}
 		
+		// Generates the chromomsome with 8 numbers.
+		public string generateChromosome() {
+			return generateChromosome(8);
+		}
+		
 		// Generates the chromomsome.
-		private string generateChromosome(int chromosomeLength) {
-			Random rnd = new Random();
+		public string generateChromosome(int chromosomeLength) {
+			if (!isMultipleOfFour(chromosomeLength)) {
+				chromosomeLength = roundUpToMultipleOfFour(chromosomeLength);
+			}
 			string randomChromosome = "";
 			for (int i = 0; i < chromosomeLength; i++) {
 				// rnd.Next(0, 2) generates a random integer that is a 0 or 1
-				randomChromosome = randomChromosome + rnd.Next(0, 2);
+				randomChromosome += randomNumber.Next(0, 2);
 			}
 			return randomChromosome;
-		}
-		
-		// Getter method for chromosome string.
-		public string getChromosomeString() {
-			return this.chromosome;
 		}
 	}
 }
