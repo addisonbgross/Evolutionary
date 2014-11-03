@@ -5,27 +5,28 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{939CB04E-DEBB-4D68-92C4-1F22C1344BFC}</ProjectGuid>
+    <ProjectGuid>{89ECB27D-F34E-4127-A598-BBCEE8ED94BA}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>EvolutionaryTesting</RootNamespace>
-    <AssemblyName>EvolutionaryTesting</AssemblyName>
+    <RootNamespace>Tests</RootNamespace>
+    <AssemblyName>Tests</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <DefineTrace>false</DefineTrace>
-    <DefineDebug>false</DefineDebug>
+    <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <AdditionalParameters />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <DefineDebug>false</DefineDebug>
-    <DefineTrace>false</DefineTrace>
-    <AdditionalParameters />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -34,7 +35,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Test.vb" />
+    <Compile Include="Test.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
