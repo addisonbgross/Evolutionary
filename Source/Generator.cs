@@ -7,19 +7,14 @@ namespace Generator {
 	// chromosome. if no input is passed to the constructor, it defaults to 8
 	// characters in length;
 	public class Generator {
+		// this is used to generate random 1's and 0's later
 		private Random randomNumber = new Random();
 		
-		// Generates a chromosome of length 8
 		public Generator() {
+			// Do Nothing
 		}
 		
-		private bool isMultipleOfFour(int input) {
-			if (input % 4 == 0) {
-				return true;
-			}
-			return false;
-		}
-		
+		// If input is not a multiple of 4 increase it until it is
 		private int roundUpToMultipleOfFour(int input) {
 			while(input%4 != 0) {
 				input++;
@@ -34,9 +29,7 @@ namespace Generator {
 		
 		// Generates the chromomsome.
 		public string generateChromosome(int chromosomeLength) {
-			if (!isMultipleOfFour(chromosomeLength)) {
-				chromosomeLength = roundUpToMultipleOfFour(chromosomeLength);
-			}
+			chromosomeLength = roundUpToMultipleOfFour(chromosomeLength);
 			string randomChromosome = "";
 			for (int i = 0; i < chromosomeLength; i++) {
 				// rnd.Next(0, 2) generates a random integer that is a 0 or 1
