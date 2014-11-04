@@ -3,6 +3,10 @@ using System;
 using System.Collections.Generic;
 using Generator;
 
+/**
+ * A collection of tests to verify the effectiveness of
+ * the evolutionary algorithm.
+ **/
 namespace Tests
 {
 	[TestFixture()]
@@ -45,15 +49,16 @@ namespace Tests
 		[Test()]
 		public void retrieveManyRandomString() {
 			List<string> strList = new List<string> ();
-			bool clean = true;
+			int allowableDuplicates = SAMPLESIZE / 10;
+
 			for (int i = 0; i < SAMPLESIZE; ++i)
 				strList.Add (generator.generateChromosome ());
 
 			for (int i = 0; i < strList.Count; ++i)
 				for (int j = 0; j < strList.Count; ++j)
 					if (strList[i] == strList[j])
-						clean = false;
-			Assert.AreEqual(true, clean);
+						--allowableDuplicates;
+			Assert.AreEqual(true, (allowableDuplicates > 0));
 		}
 
 		/********************
