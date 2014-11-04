@@ -11,6 +11,9 @@ namespace Tests
 		int SAMPLESIZE = 100;
 		Generator.Generator generator = new Generator.Generator();
 
+		/*******************
+		 * Generator Tests *
+		 ******************/
 		[Test()]
 		public void checkIfStringIsGenerated() {
 			Assert.AreEqual(generator.generateChromosome().GetType(), typeof(string));
@@ -52,6 +55,27 @@ namespace Tests
 						clean = false;
 			Assert.AreEqual(true, clean);
 		}
+
+		/********************
+		 * Controller Tests *
+		 *******************/
+
+		/*****************
+		 * Mutator Tests *
+		 ****************/
+
+		/*****************
+		 * Decoder Tests *
+		 ****************/
+
+		/******************
+		 * Selector Tests *
+		 *****************/
+
+		/**************
+		 * View Tests *
+		 **************/
+
 	}
 }
 
