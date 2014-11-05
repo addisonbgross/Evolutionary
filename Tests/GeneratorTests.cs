@@ -10,14 +10,11 @@ using Generator;
 namespace Tests
 {
 	[TestFixture()]
-	public class Test
+	public class GeneratorTests
 	{
 		int SAMPLESIZE = 100;
 		Generator.Generator generator = new Generator.Generator();
 
-		/*******************
-		 * Generator Tests *
-		 ******************/
 		[Test()]
 		public void checkIfStringIsGenerated() {
 			Assert.AreEqual(generator.generateChromosome().GetType(), typeof(string));
@@ -60,27 +57,6 @@ namespace Tests
 						--allowableDuplicates;
 			Assert.AreEqual(true, (allowableDuplicates > 0));
 		}
-
-		/********************
-		 * Controller Tests *
-		 *******************/
-
-		/*****************
-		 * Mutator Tests *
-		 ****************/
-
-		/*****************
-		 * Decoder Tests *
-		 ****************/
-
-		/******************
-		 * Selector Tests *
-		 *****************/
-
-		/**************
-		 * View Tests *
-		 **************/
-
 	}
 }
 

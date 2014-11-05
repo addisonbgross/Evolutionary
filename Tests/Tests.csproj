@@ -35,10 +35,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Test.cs" />
     <Compile Include="..\Source\Generator.cs">
       <Link>Generator.cs</Link>
     </Compile>
+    <Compile Include="ControllerTests.cs" />
+    <Compile Include="GeneratorTests.cs" />
+    <Compile Include="DecoderTests.cs" />
+    <Compile Include="MutatorTests.cs" />
+    <Compile Include="ViewTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
