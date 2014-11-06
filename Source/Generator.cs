@@ -9,19 +9,15 @@ namespace Generator {
 	public class Generator {
 		private Random randomNumber = new Random();
 		
-		// Generates a chromosome of length 8
 		public Generator() {
 		}
 		
 		private bool isMultipleOfFour(int input) {
-			if (input % 4 == 0) {
-				return true;
-			}
-			return false;
+			return (input % 4 == 0) ? true : false;
 		}
 		
 		private int roundUpToMultipleOfFour(int input) {
-			while(input%4 != 0) {
+			while(!isMultipleOfFour(input)) {
 				input++;
 			}
 			return input;
@@ -34,9 +30,7 @@ namespace Generator {
 		
 		// Generates the chromomsome.
 		public string generateChromosome(int chromosomeLength) {
-			if (!isMultipleOfFour(chromosomeLength)) {
-				chromosomeLength = roundUpToMultipleOfFour(chromosomeLength);
-			}
+			chromosomeLength = roundUpToMultipleOfFour(chromosomeLength);
 			string randomChromosome = "";
 			for (int i = 0; i < chromosomeLength; i++) {
 				// rnd.Next(0, 2) generates a random integer that is a 0 or 1
