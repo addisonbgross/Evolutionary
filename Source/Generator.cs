@@ -7,17 +7,16 @@ namespace Generator {
 	// chromosome. if no input is passed to the constructor, it defaults to 8
 	// characters in length;
 	public class Generator {
+		// this is used to generate random 1's and 0's later
 		private Random randomNumber = new Random();
 		
 		public Generator() {
+			// Do Nothing
 		}
-		
-		private bool isMultipleOfFour(int input) {
-			return (input % 4 == 0) ? true : false;
-		}
-		
+	
+		// If input is not a multiple of 4 increase it until it is
 		private int roundUpToMultipleOfFour(int input) {
-			while(!isMultipleOfFour(input)) {
+			while(input%4 != 0) {
 				input++;
 			}
 			return input;

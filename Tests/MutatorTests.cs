@@ -4,7 +4,7 @@ using System;
 namespace Tests
 {
 	[TestFixture()]
-	public class Test
+	public class MutatorTests
 	{
 		[Test()]
 		public void TestCase ()
