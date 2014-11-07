@@ -1,15 +1,19 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Test.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../Source/Selector.cs">
     <Files>
-      <File FileName="Test.cs" Line="18" Column="23" />
-      <File FileName="../Source/Generator.cs" Line="14" Column="17" />
+      <File FileName="GeneratorTests.cs" Line="43" Column="46" />
+      <File FileName="MutatorTests.cs" Line="5" Column="1" />
+      <File FileName="../Source/Generator.cs" Line="16" Column="26" />
+      <File FileName="../Source/Selector.cs" Line="14" Column="4" />
+      <File FileName="SelectorTests.cs" Line="19" Column="37" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Tests" expanded="True">
-            <Node name="Test.cs" selected="True" />
+            <Node name="References" expanded="True" />
+            <Node name="Selector.cs" selected="True" />
           </Node>
         </State>
       </Pad>
@@ -20,7 +24,13 @@
         <State />
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True" selected="True">
+          <Node name="Tests" expanded="True">
+            <Node name="Tests" expanded="True">
+              <Node name="ControllerTests" expanded="True" />
+            </Node>
+          </Node>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

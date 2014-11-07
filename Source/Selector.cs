@@ -29,6 +29,7 @@ namespace Selector {
 			foreach (string key in keys) {
 				KeyValuePair<int, String> kvp = new KeyValuePair<int, String> (random.Next(), key);
 				deathList.Add (kvp);
+
 				killLevel += chromosomes [key];
 				//chromosomes [key] = Math.Round (chromosomes[key], 3);
 			}
