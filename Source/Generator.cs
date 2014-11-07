@@ -7,7 +7,7 @@ namespace Generator {
 	// it defaults to 8 characters in length;
 	public class Generator {
 		// this is used to generate random 1's and 0's later
-		private Random randomNumber = new Random();
+		static private Random randomNumber = new Random();
 		
 		public Generator() {
 			// Do Nothing
@@ -22,7 +22,7 @@ namespace Generator {
 		}	
 
 		private int roundUpToMultipleOfFour(int input) {
-			while(!isMultipleOfFour) {
+			while(!isMultipleOfFour(input)) {
 				input++;
 			}
 			return input;
