@@ -7,14 +7,14 @@ namespace Generator {
 	// it defaults to 8 characters in length;
 	public class Generator {
 		// this is used to generate random 1's and 0's later
-		private Random randomNumber = new Random();
+		static private Random randomNumber = new Random();
 		
 		public Generator() {
 			// Do Nothing
 		}
 
 		private int getRandom0or1() {
-			return randomNumber.Next(0.2);
+			return randomNumber.Next(0,2);
 		}
 		
 		private bool isMultipleOfFour(int input) {
@@ -22,7 +22,7 @@ namespace Generator {
 		}	
 
 		private int roundUpToMultipleOfFour(int input) {
-			while(!isMulipleOfFour) {
+			while(!isMultipleOfFour(input)) {
 				input++;
 			}
 			return input;
