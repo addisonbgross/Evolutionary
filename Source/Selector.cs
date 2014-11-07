@@ -3,34 +3,44 @@ using System.Collections.Generic;
 
 namespace Selector {
 	public class Selector {
-		static Dictionary<int, String> deathList = new Dictionary<float, String> ();
+		static List<KeyValuePair<int, String>> deathList = new List<KeyValuePair<int, String>> ();
 		static Random random = new Random();
 		static float killLevel;
 
 		public Selector (){}
 
-		public void Select (Dictionary<string, float> chromosomes, float killRate) {
+		/*
+		static void Main() {
+			Selector s = new Selector ();
+			Dictionary<string, float> d = new Dictionary<string, float>();
+			d.Add ("SADFASD", 1.0f);
+			s.Select (d, 1.0f);
+			Console.WriteLine (d.Count);
+		}
+		*/
 
-			deathList.Clear;
+		public void Select (Dictionary<string, float> chromosomes, float killRate) {
+		
+			deathList.Clear();
 			killLevel = 0;
 
 			var keys = new List<string> (chromosomes.Keys);
 		
 			foreach (string key in keys) {
-				deathList.Add (random.Next, key);
+				KeyValuePair<int, String> kvp = new KeyValuePair<int, String> (random.Next(), key);
+				deathList.Add (kvp);
 				killLevel += chromosomes [key];
 				//chromosomes [key] = Math.Round (chromosomes[key], 3);
 			}
 
 			killLevel *= killRate;
-			List<KeyValuePair<int, String>> list = deathList;
-			list.Sort ();
+			deathList.Sort ();
 
-			foreach (String s in list) {
-				if (killLevel -= chromosomes (s) < 0) {
+			foreach (KeyValuePair<int, String> kvp in deathList) {
+				if ((killLevel -= chromosomes[kvp.Value]) < 0) {
 					break;
 				}
-				chromosomes.Remove (s);
+				chromosomes.Remove (kvp.Value);
 			}
 		}
 	}

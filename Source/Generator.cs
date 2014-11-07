@@ -15,7 +15,7 @@ namespace Generator {
 		}
 
 		private int getRandom0or1() {
-			return randomNumber.Next(0.2);
+			return randomNumber.Next(0, 2);
 		}
 		
 		private bool isMultipleOfFour(int input) {
@@ -23,7 +23,7 @@ namespace Generator {
 		}	
 
 		private int roundUpToMultipleOfFour(int input) {
-			while(!isMulipleOfFour) {
+			while(!isMultipleOfFour) {
 				input++;
 			}
 			return input;
