@@ -22,7 +22,7 @@ namespace Generator {
 		}	
 
 		private int roundUpToMultipleOfFour(int input) {
-			while(!isMultipleOfFour) {
+			while(!isMultipleOfFour(input) {
 				input++;
 			}
 			return input;
