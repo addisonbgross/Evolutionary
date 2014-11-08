@@ -28,23 +28,31 @@ namespace Generator {
 		public Decoder() {
 		
 		}
+		private const bool DEBUG = true;
 		
 		public Dictionary<string, float> decode(int target, Dictionary<string, float> chromosomeSet) {
 			List<string> fourDigitStrings = new List<string>();
 			fourDigitStrings = getListOfFourDigitStringsFromDictionary(chromosomeSet);
+			string stringFromChromosomeSet = getChromosomeStringFromDictionary(chromosomeSet);
 			
 			if (isFitnessScoreCalculatable(fourDigitStrings)) {
-				// TODO
-				// assign the fitness score of the chromosome with this once findFitnessScoreUsingFourDigitList
-				// has been implemented.
-				//1/((float)target - findFitnessScoreUsingFourDigitList(fourDigitStrings));
+				
+				
+				float fitnessScore = (float)1/ ((float)target -findFitnessScoreUsingFourDigitList(fourDigitStrings));
+				
+				if (DEBUG) {
+					Console.WriteLine("Fitness Score = " + fitnessScore);
+				}
+				
+				chromosomeSet.Clear();
+				chromosomeSet.Add(stringFromChromosomeSet, fitnessScore);
 			}
 			else {
 				// Could not calculate
+				if (DEBUG) {
+					Console.WriteLine("Could not Calculate");
+				}
 			}
-			
-			
-			Console.WriteLine(fourDigitStrings[0]);
 			
 			return chromosomeSet;
 		}
@@ -83,63 +91,83 @@ namespace Generator {
 			for (int i = 1; i < fourDigitList.Capacity; i++) {
 				runningTotal += getValueAsString(fourDigitList[i]);
 			}
-			// TODO find a way to return the evaluation of runningTotal
-			// return
-			return -1;
-			
+			return Evaluate(runningTotal);			
 		}
 		
 		private string getValueAsString(string fourDigitChromosome) {
 			switch (fourDigitChromosome) {
 			case "0000":
+				if (DEBUG) {
+					Console.WriteLine("0");
+				}
 				return "0";
 			case "0001":
+				if (DEBUG) {
+					Console.WriteLine("1");
+				}
 				return "1";
 			case "0010":
+				if (DEBUG) {
+					Console.WriteLine("2");
+				}
 				return "2";
 			case "0011":
+				if (DEBUG) {
+					Console.WriteLine("3");
+				}
 				return "3";
 			case "0100":
+				if (DEBUG) {
+					Console.WriteLine("4");
+				}
 				return "4";
 			case "0101":
+				if (DEBUG) {
+					Console.WriteLine("5");
+				}
 				return "5";
 			case "0110":
+				if (DEBUG) {
+					Console.WriteLine("6");
+				}
 				return "6";
 			case "0111":
+				if (DEBUG) {
+					Console.WriteLine("7");
+				}
 				return "7";
 			case "1000":
+				if (DEBUG) {
+					Console.WriteLine("8");
+				}
 				return "8";
 			case "1001":
+				if (DEBUG) {
+					Console.WriteLine("9");
+				}
 				return "9";
 			case "1010":
+				if (DEBUG) {
+					Console.WriteLine("+");
+				}
 				return "+";
 			case "1011":
+				if (DEBUG) {
+					Console.WriteLine("-");
+				}
 				return "-";
 			case "1100":
+				if (DEBUG) {
+					Console.WriteLine("*");
+				}
 				return "*";
 			default:
+				if (DEBUG) {
+					Console.WriteLine("/");
+				}
 				return "/";
 			}
 		}
-		
-		
-		// Probably will never need this
-//		private bool isCharANumber(char number) {
-//			if (number == '0' || number == '1' || number == '2' ||
-//				number == '3' || number == '4' || number == '5' || 
-//				number == '6' || number == '7' || number == '8' || 
-//				number == '9') {
-//				return true;
-//			}			
-//			return false;
-//		}
-		
-		// Should Never Need this
-//		private float addDigitOntoTheEnd(float addee, float toBeAdded) {
-//			addee *= 10;
-//			addee += toBeAdded;
-//			return addee;
-//		}
 		
 			// if the first or last set of four digits corresponds to a operator,
 			// or is dormant, then return false
@@ -186,13 +214,18 @@ namespace Generator {
 			return false;
 		}
 		
-		// Probably never needed
-//		private bool isNumber(string fourDigitChromosome) {
-//			if (!isOperator(fourDigitChromosome) && !isDormant(fourDigitChromosome)) {
-//				return true;
-//			}
-//			return false;
-//		}
+		private float Evaluate(string expression) {
+			DataTable table = new DataTable();
+			table.Columns.Add("expression", typeof(string), expression);
+			DataRow row = table.NewRow();
+			table.Rows.Add(row);
+			
+			if (DEBUG) {
+				Console.WriteLine("Evaluated Expression = " + float.Parse((string)row["expression"]));	
+			}
+			
+			return float.Parse((string)row["expression"]);
+		}
 		
 		
 	}
