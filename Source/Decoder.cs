@@ -29,6 +29,8 @@ namespace Generator {
 		
 		}
 		private const bool DEBUG = true;
+
+		Parser myParser = new Parser();
 		
 		public Dictionary<string, float> decode(int target, Dictionary<string, float> chromosomeSet) {
 			List<string> fourDigitStrings = new List<string>();
@@ -91,7 +93,7 @@ namespace Generator {
 			for (int i = 1; i < fourDigitList.Capacity; i++) {
 				runningTotal += getValueAsString(fourDigitList[i]);
 			}
-			return Evaluate(runningTotal);			
+			return myParser.Evaluate(runningTotal);			
 		}
 		
 		private string getValueAsString(string fourDigitChromosome) {
@@ -212,21 +214,6 @@ namespace Generator {
 				return true;
 			}
 			return false;
-		}
-		
-		private float Evaluate(string expression) {
-			DataTable table = new DataTable();
-			table.Columns.Add("expression", typeof(string), expression);
-			DataRow row = table.NewRow();
-			table.Rows.Add(row);
-			
-			if (DEBUG) {
-				Console.WriteLine("Evaluated Expression = " + float.Parse((string)row["expression"]));	
-			}
-			
-			return float.Parse((string)row["expression"]);
-		}
-		
-		
+		}		
 	}
 }
