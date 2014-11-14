@@ -10,18 +10,16 @@ namespace Evolutionary
 		public static void Main() {
 			Application.Init ();
 			Evolutionary evo = new Evolutionary();
-			evo.SetSizeRequest (400,400);
+			evo.SetSizeRequest (600,300);
 			evo.DeleteEvent += OnDeleteEvent;
 
-
-			//Window viewWin = new Window ();
-			View v = new View ();
+			GraphView v = new GraphView ();
 			Controller c = new Controller ();
-			//evo.Add (v.getView());
-			evo.Add(c.GetInterface ());
-			//tBox.Add (v.getView());
-			//evo.Add (tBox);
+			HBox tBox = new HBox ();
 
+			tBox.Add (c.GetInterface ());
+			tBox.Add (v.GetView());
+			evo.Add (tBox);
 			evo.ShowAll ();
 			Application.Run ();
 		}
