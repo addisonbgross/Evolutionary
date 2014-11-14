@@ -1,19 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../Source/Selector.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../Source/ControllerView.cs">
     <Files>
-      <File FileName="GeneratorTests.cs" Line="43" Column="46" />
-      <File FileName="MutatorTests.cs" Line="5" Column="1" />
-      <File FileName="../Source/Generator.cs" Line="16" Column="26" />
-      <File FileName="../Source/Selector.cs" Line="14" Column="4" />
-      <File FileName="SelectorTests.cs" Line="19" Column="37" />
+      <File FileName="GeneratorTests.cs" Line="11" Column="2" />
+      <File FileName="../Source/Controller.cs" Line="7" Column="33" />
+      <File FileName="TestWindow.cs" Line="8" Column="26" />
+      <File FileName="../Source/ControllerView.cs" Line="17" Column="23" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Tests" expanded="True">
-            <Node name="References" expanded="True" />
-            <Node name="Selector.cs" selected="True" />
+            <Node name="ControllerView.cs" selected="True" />
           </Node>
         </State>
       </Pad>
@@ -24,13 +22,7 @@
         <State />
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True" selected="True">
-          <Node name="Tests" expanded="True">
-            <Node name="Tests" expanded="True">
-              <Node name="ControllerTests" expanded="True" />
-            </Node>
-          </Node>
-        </State>
+        <State expanded="True" selected="True" />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

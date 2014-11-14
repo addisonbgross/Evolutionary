@@ -9,14 +9,14 @@ namespace Test
 	public class SelectorTests
 	{
 		Selector.Selector selector = new Selector.Selector();
-		Dictionary<String, float> dictionary = new Dictionary<String, float> ();
+		static Dictionary<string, float> dictionary = new Dictionary<string, float> ();
 
 		[Test()]
 		public void killAll () {
-			int countBeforeKilling = dictionary.Count;
-
+			dictionary.Clear ();
+			string s = "000";
 			for (int i = 0; i < 100; ++i)
-				dictionary.Add("0101010", 1.0f);
+				dictionary.Add(s += "1", 1.0f);
 			
 			selector.Select (dictionary, 1.0f);
 
@@ -24,10 +24,11 @@ namespace Test
 		}
 		[Test()]
 		public void killHalf () {
+			dictionary.Clear ();
 			int countBeforeKilling = dictionary.Count / 2;
-
+			string s = "101";
 			for (int i = 0; i < 100; ++i)
-				dictionary.Add("0101010", 1.0f);
+				dictionary.Add(s += "1", 1.0f);
 
 			selector.Select (dictionary, 0.5f);
 

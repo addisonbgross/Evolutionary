@@ -3,9 +3,9 @@ using Gtk;
 
 namespace Tests
 {
-	public partial class Window : Gtk.Window
+	public partial class TestWindow : Gtk.Window
 	{
-		public Window () : 
+		public TestWindow () : 
 				base(Gtk.WindowType.Toplevel)
 		{
 			this.Build ();
@@ -14,7 +14,7 @@ namespace Tests
 
 		public static void Main() {
 			Application.Init ();
-			Window w = new Window ();
+			TestWindow w = new TestWindow ();
 			Application.Run ();
 		}
 	}
