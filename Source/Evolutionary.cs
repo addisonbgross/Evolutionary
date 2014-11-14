@@ -3,7 +3,7 @@ using Gtk;
 
 namespace Evolutionary
 {
-	public class Evolutionary : Window
+	public class Evolutionary : Gtk.Window
 	{
 		public Evolutionary () : base (WindowType.Toplevel) {
 		}
@@ -13,10 +13,14 @@ namespace Evolutionary
 			evo.SetSizeRequest (400,400);
 			evo.DeleteEvent += OnDeleteEvent;
 
-			//View view = new View ();
+
+			//Window viewWin = new Window ();
+			View v = new View ();
 			Controller c = new Controller ();
-			//evo.Add (view);
-			evo.Add (c.GetInterface());
+			//evo.Add (v.getView());
+			evo.Add(c.GetInterface ());
+			//tBox.Add (v.getView());
+			//evo.Add (tBox);
 
 			evo.ShowAll ();
 			Application.Run ();
