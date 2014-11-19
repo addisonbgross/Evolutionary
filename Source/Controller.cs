@@ -1,6 +1,6 @@
 using System;
 using Gtk;
-
+//TODO decouple the graphView from the Controller somehow
 public class Controller
 {
 	Button startButton, resetButton, drawButton;
@@ -67,10 +67,8 @@ public class Controller
 		SendInput ();
 	}
 	public void DrawEvent(object obj, EventArgs args) {
-		/*
 		if(graphView != null)
-			graphView.OnExpose (null, null);
-		*/
+			graphView.ReDraw();
 	}
 	public void SetGraph(Evolutionary.GraphView gv) {
 		this.graphView = gv;
