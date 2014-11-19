@@ -3,8 +3,9 @@ using Gtk;
 
 public class Controller
 {
-	Button startButton, resetButton;
+	Button startButton, resetButton, drawButton;
 	Entry mutationEntry, crossoverEntry;
+	Evolutionary.GraphView graphView;
 
 	public Controller () {}
 	public VBox GetInterface() {
@@ -16,6 +17,9 @@ public class Controller
 
 		startButton = new Button ("Start");
 		startButton.Clicked += StartEvent;
+
+		drawButton = new Button ("Draw");
+		drawButton.Clicked += DrawEvent;
 
 		resetButton = new Button ("Reset");
 		resetButton.Clicked += ResetEvent;
@@ -39,6 +43,7 @@ public class Controller
 		inputBox2.Add (crossoverEntry);
 
 		buttonBox.Add (startButton);
+		buttonBox.Add (drawButton);
 		buttonBox.Add (resetButton);
 
 		box.Add (inputBox1);
@@ -60,6 +65,15 @@ public class Controller
 	}
 	public void StartEvent(object obj, EventArgs args) {
 		SendInput ();
+	}
+	public void DrawEvent(object obj, EventArgs args) {
+		/*
+		if(graphView != null)
+			graphView.OnExpose (null, null);
+		*/
+	}
+	public void SetGraph(Evolutionary.GraphView gv) {
+		this.graphView = gv;
 	}
 	public void ResetEvent(object obj, EventArgs args) {
 		ClearEntries ();
