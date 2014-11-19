@@ -19,6 +19,7 @@ namespace Evolutionary
 
 			tBox.Add (c.GetInterface ());
 			tBox.Add (v.GetView());
+			c.SetGraph (v);
 			evo.Add (tBox);
 			evo.ShowAll ();
 			Application.Run ();
