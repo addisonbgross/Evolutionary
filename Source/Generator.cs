@@ -1,6 +1,6 @@
 using System;
 
-namespace Generator {
+namespace Evolutionary {
 
 	// Creating a new object of this class automatically creates a random
 	// chromosome. if no input is passed to the generateChromosome function,

@@ -30,9 +30,11 @@ namespace Evolutionary
 			cr.SetSourceRGB (0, 0, 0);
 			cr.Fill ();
 
+			//draw graph if not null
 			if (graphValues != null) {
 				double barWidth = (double)width / graphValues.Count;
 				double currentX = 0;
+				//color gradient from pink -> cyan
 				double incR = -1.0 / graphValues.Count, incG = 1.0 / graphValues.Count;
 				double R = 1, G = 0, B = 1; 
 
@@ -51,7 +53,7 @@ namespace Evolutionary
 		public void ReDraw() {
 			graph.QueueDraw ();
 		}
-		public void UpdateValues(Dictionary<string, float> values) {
+		public void SetValues(Dictionary<string, float> values) {
 			graphValues = values;
 		}
 	}

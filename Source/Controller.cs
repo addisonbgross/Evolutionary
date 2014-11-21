@@ -81,20 +81,8 @@ public class Controller
 		SendInput ();
 	}
 	public void DrawEvent(object obj, EventArgs args) {
-		if (graphView != null) {
-			////<TESTING>////
-			Random r = new Random ();
-			Dictionary<string, float> d = new Dictionary<string, float> ();
-
-			string s = "!";
-			for (int i = 0; i < 100; i++) {
-				d.Add (s, (float)r.NextDouble());
-				s += "!";
-			}
-			graphView.UpdateValues (d);
-			////</TESTING>////
+		if (graphView != null)
 			graphView.ReDraw ();
-		}
 	}
 	public void SetGraph(Evolutionary.GraphView gv) {
 		this.graphView = gv;
