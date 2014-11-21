@@ -1,18 +1,19 @@
 using System;
 using Gtk;
+
 //TODO decouple the graphView from the Controller somehow
 public class Controller
 {
 	Button startButton, resetButton, drawButton;
-	Entry mutationEntry, crossoverEntry;
+	Entry mutationEntry, crossoverEntry, selectionEntry, chromosomeEntry;
 	Evolutionary.GraphView graphView;
 
 	public Controller () {}
 	public VBox GetInterface() {
 		VBox box = new VBox(false, 0);
-
-		HBox inputBox1 = new HBox (false, 0);
-		HBox inputBox2 = new HBox (false, 0);
+		VBox inputBound = new VBox (false, 0);
+		VBox inputBox1 = new VBox (false, 0);
+		VBox inputBox2 = new VBox (false, 0);
 		HBox buttonBox = new HBox (false, 0);
 
 		startButton = new Button ("Start");
@@ -25,29 +26,39 @@ public class Controller
 		resetButton.Clicked += ResetEvent;
 
 		mutationEntry = new Entry ();
-		mutationEntry.SetSizeRequest (30, 30);
+		mutationEntry.SetSizeRequest (10, 30);
 		mutationEntry.MaxLength = 10;
 		crossoverEntry = new Entry ();
-		crossoverEntry.SetSizeRequest (30, 30);
+		crossoverEntry.SetSizeRequest (10, 30);
 		crossoverEntry.MaxLength = 10;
+		selectionEntry = new Entry ();
+		selectionEntry.SetSizeRequest (10, 30);
+		selectionEntry.MaxLength = 10;
+		chromosomeEntry = new Entry ();
+		chromosomeEntry.SetSizeRequest (10, 30);
+		chromosomeEntry.MaxLength = 10;
 
-
-		inputBox1.Add (new Label ("Set Mutation Rate"));
+		inputBox1.Add (new Label ("Mutation Rate"));
 		inputBox1.Add (mutationEntry);
-		inputBox1.Add (new Label ("Set Crossover Rate"));
+		inputBox1.Add (new Label ("Crossover Rate"));
 		inputBox1.Add (crossoverEntry);
 
-		inputBox2.Add (new Label ("Set Mutation Rate"));
-		inputBox2.Add (mutationEntry);
-		inputBox2.Add (new Label ("Set Crossover Rate"));
-		inputBox2.Add (crossoverEntry);
+		inputBox2.Add (new Label ("Selection Rate"));
+		inputBox2.Add (selectionEntry);
+		inputBox2.Add (new Label ("Chromosome Length"));
+		inputBox2.Add (chromosomeEntry);
 
 		buttonBox.Add (startButton);
 		buttonBox.Add (drawButton);
 		buttonBox.Add (resetButton);
 
-		box.Add (inputBox1);
-		box.Add (inputBox2);
+		inputBound.Add (inputBox1);
+		inputBound.Add (inputBox2);
+
+		box.BorderWidth = 10;
+		//box.Add (inputBox1);
+		//box.Add (inputBox2);
+		box.Add (inputBound);
 		box.Add (buttonBox);
 		box.Show (); 
 		return box;
