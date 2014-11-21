@@ -10,6 +10,7 @@ namespace Evolutionary
 		private Cairo.Context cr;
 		private int width, height;
 		private DrawingArea graph = new DrawingArea ();
+		private Dictionary<string, float> graphValues;
 
 		public GraphView () {}
 
@@ -29,32 +30,29 @@ namespace Evolutionary
 			cr.SetSourceRGB (0, 0, 0);
 			cr.Fill ();
 
-			Random r = new Random ();
-			Dictionary<string, float> d = new Dictionary<string, float> ();
+			if (graphValues != null) {
+				double barWidth = (double)width / graphValues.Count;
+				double currentX = 0;
+				double incR = -1.0 / graphValues.Count, incG = 1.0 / graphValues.Count;
+				double R = 1, G = 0, B = 1; 
 
-			string s = "!";
-			for (int i = 0; i < 100; i++) {
-				d.Add (s, (float)r.NextDouble());
-				s += "!";
-			}
-			double barWidth = (double)width / d.Count;
-			double currentX = 0;
-			double incR = -1.0 / d.Count, incG = 1.0 / d.Count;
-			double R = 1, G = 0, B = 1; 
-
-			foreach (KeyValuePair<string, float> kvp in d) {
-				cr.Rectangle (currentX, height, barWidth, -(height * kvp.Value));
-				cr.StrokePreserve ();
-				cr.SetSourceRGB (R, G, B);
-				R += incR;
-				G += incG;
-				cr.Fill ();
-				currentX += barWidth;
+				foreach (KeyValuePair<string, float> kvp in graphValues) {
+					cr.Rectangle (currentX, height, barWidth, -(height * kvp.Value));
+					cr.StrokePreserve ();
+					cr.SetSourceRGB (R, G, B);
+					R += incR;
+					G += incG;
+					cr.Fill ();
+					currentX += barWidth;
+				}
 			}
 			cr.Dispose ();
 		}
 		public void ReDraw() {
 			graph.QueueDraw ();
+		}
+		public void UpdateValues(Dictionary<string, float> values) {
+			graphValues = values;
 		}
 	}
 }

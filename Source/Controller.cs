@@ -2,6 +2,9 @@ using System;
 using Gtk;
 
 //TODO decouple the graphView from the Controller somehow
+using System.Collections.Generic;
+
+
 public class Controller
 {
 	Button startButton, resetButton, drawButton;
@@ -78,8 +81,20 @@ public class Controller
 		SendInput ();
 	}
 	public void DrawEvent(object obj, EventArgs args) {
-		if(graphView != null)
-			graphView.ReDraw();
+		if (graphView != null) {
+			////<TESTING>////
+			Random r = new Random ();
+			Dictionary<string, float> d = new Dictionary<string, float> ();
+
+			string s = "!";
+			for (int i = 0; i < 100; i++) {
+				d.Add (s, (float)r.NextDouble());
+				s += "!";
+			}
+			graphView.UpdateValues (d);
+			////</TESTING>////
+			graphView.ReDraw ();
+		}
 	}
 	public void SetGraph(Evolutionary.GraphView gv) {
 		this.graphView = gv;
