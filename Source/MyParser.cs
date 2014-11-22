@@ -1,9 +1,7 @@
-
 using System;
 using System.Collections;
 
-namespace StringParser {
-
+namespace Evolutionary {
 
 	public class MyParser {
 

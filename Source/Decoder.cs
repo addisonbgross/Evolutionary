@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 
 
-namespace Generator {
+namespace Evolutionary {
 	/*
 	 * 0: 0000
 	 * 1: 0001
@@ -30,7 +30,7 @@ namespace Generator {
 		}
 		private const bool DEBUG = true;
 
-		Parser myParser = new Parser();
+		MyParser myParser = new MyParser();
 		
 		public Dictionary<string, float> decode(int target, Dictionary<string, float> chromosomeSet) {
 			List<string> fourDigitStrings = new List<string>();
@@ -179,13 +179,13 @@ namespace Generator {
 			if (isOperator(fourDigitList[0]) || isDormant(fourDigitList[0])) {
 				return false;
 			}
-			int maxIndexOfFourDigitList = fourDigitList.Capacity - 1;
+			int maxIndexOfFourDigitList = fourDigitList.Count - 1;
 			if (isOperator(fourDigitList[maxIndexOfFourDigitList]) || 
 				isDormant(fourDigitList[maxIndexOfFourDigitList])) {
 				return false;
 			}
 			int lastIndexThatWasOperator = -5; // Something that will never mess up the rest
-			for (int i = 0; i < fourDigitList.Capacity; i++) {
+			for (int i = 0; i < fourDigitList.Count; i++) {
 				if (isDormant(fourDigitList[i])) {
 					return false;
 				}

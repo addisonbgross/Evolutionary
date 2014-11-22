@@ -17,12 +17,14 @@ namespace Evolutionary
 			Generator g = new Generator ();
 			GraphView v = new GraphView ();
 			Controller c = new Controller ();
+			Decoder d = new Decoder ();
 			HBox tBox = new HBox ();
 
 			//for testing purposes only
 			Dictionary<string, float> chromosomes = new Dictionary<string, float> ();
 			for (int i = 0; i < 10; i++)
 				chromosomes.Add (g.generateChromosome(), (float)i/10);
+			chromosomes = d.decode (5, chromosomes); //NOT WORKING
 			v.SetValues (chromosomes);
 
 			tBox.Add (c.GetInterface ());
