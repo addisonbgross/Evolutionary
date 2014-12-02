@@ -39,7 +39,6 @@ namespace Evolutionary {
 			
 			if (isFitnessScoreCalculatable(fourDigitStrings)) {
 				
-				
 				float fitnessScore = (float)1/ ((float)target -findFitnessScoreUsingFourDigitList(fourDigitStrings));
 				
 				if (DEBUG) {
