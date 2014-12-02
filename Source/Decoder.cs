@@ -89,7 +89,7 @@ namespace Evolutionary {
 		private float findFitnessScoreUsingFourDigitList(List<string> fourDigitList) {
 			string runningTotal = getValueAsString(fourDigitList[0]);
 			
-			for (int i = 1; i < fourDigitList.Capacity; i++) {
+			for (int i = 1; i < fourDigitList.Count; i++) {
 				runningTotal += getValueAsString(fourDigitList[i]);
 			}
 			return myParser.Evaluate(runningTotal);			

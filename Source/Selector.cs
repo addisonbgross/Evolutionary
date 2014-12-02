@@ -21,21 +21,6 @@ namespace Selector {
 
 		public Selector (){}
 
-		/*
-		static void Main() {
-			Selector s = new Selector ();
-			Dictionary<string, float> d = new Dictionary<string, float>();
-			d.Add ("SADFASD", 1.0f);
-			d.Add ("SADTTSD", 0.9f);
-			d.Add ("SASD", 0.8f);
-			d.Add ("SADTSD", 0.1f);
-			d.Add ("SAFFSD", 0.1f);
-			d.Add ("SASSDTSD", 0.1f);
-			s.Select (d, 1.0f);
-			Console.WriteLine (d.Count);
-		}
-		*/
-
 		public void Select (Dictionary<string, float> chromosomes, float killRate) {
 		
 			deathList.Clear();

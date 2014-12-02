@@ -6,10 +6,12 @@ namespace Evolutionary
 {
 	public class Mutator 
 	{
-		public Mutator() {}
+		public Mutator(int size) {
+			chromosomeMaxSize = size;
+		}
 
 		private Random r = new Random();
-		private const int chromosomeMaxSize = 8;
+		private int chromosomeMaxSize;
 
 		public Dictionary<string, float> Mutate(
 			Dictionary<string, float> chromosomeDictionary, 
@@ -36,12 +38,16 @@ namespace Evolutionary
 				              + chromosome2.Key.Substring (swapIndex);
 				string new2 = chromosome2.Key.Substring (0, swapIndex)
 				              + chromosome1.Key.Substring (swapIndex);
-					
-				affectedChromosomes.Add (new1, 0f);
-				affectedChromosomes.Add (new2, 0f);
+
+				if(!affectedChromosomes.ContainsKey(new1)) //ensures no duplicates
+					affectedChromosomes.Add (new1, 0f);
+				if(!affectedChromosomes.ContainsKey(new2))
+					affectedChromosomes.Add (new2, 0f);
 			}
-			foreach (KeyValuePair<string, float> kvp in chromosomes)
-				affectedChromosomes.Add (kvp.Key, kvp.Value);
+			foreach (KeyValuePair<string, float> kvp in chromosomes) {
+				if(!affectedChromosomes.ContainsKey(kvp.Key)) //ensures no duplicates
+					affectedChromosomes.Add (kvp.Key, kvp.Value);
+			}
 				
 			chromosomes.Clear ();
 
