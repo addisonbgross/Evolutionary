@@ -7,8 +7,7 @@ namespace Evolutionary {
 
 		private Stack numbersStack = new Stack();
 		
-		public MyParser() {
-		}
+		public MyParser() {}
 		
 		// 50+25
 		public float Evaluate(string expression) {
@@ -20,6 +19,7 @@ namespace Evolutionary {
 			char tempOperator = '/';
 			bool multiplyTempNumber = false;
 			bool canUseTempOperator = false;
+			numbersStack.Push (1f);
 			
 			for (int i = 0; i < expression.Length; i++) {
 				if (isNumber(expression[i])) {

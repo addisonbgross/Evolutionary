@@ -33,29 +33,27 @@ namespace Evolutionary {
 		MyParser myParser = new MyParser();
 		
 		public Dictionary<string, float> decode(int target, Dictionary<string, float> chromosomeSet) {
-			List<string> fourDigitStrings = new List<string>();
-			fourDigitStrings = getListOfFourDigitStringsFromDictionary(chromosomeSet);
-			string stringFromChromosomeSet = getChromosomeStringFromDictionary(chromosomeSet);
+
+			Dictionary<string, float> scoredChromosomes = new Dictionary<string, float> (); //temp
+
+			foreach (KeyValuePair<string, float> chromosome in chromosomeSet) {
+				List<string> fourDigitStrings = getListOfFourDigitStringsFromChromosome (chromosome);
 			
-			if (isFitnessScoreCalculatable(fourDigitStrings)) {
+				if (isFitnessScoreCalculatable (fourDigitStrings)) {
 				
-				float fitnessScore = (float)1/ ((float)target -findFitnessScoreUsingFourDigitList(fourDigitStrings));
+					float fitnessScore = (float)1 / ((float)target - findFitnessScoreUsingFourDigitList (fourDigitStrings));
 				
-				if (DEBUG) {
-					Console.WriteLine("Fitness Score = " + fitnessScore);
-				}
-				
-				chromosomeSet.Clear();
-				chromosomeSet.Add(stringFromChromosomeSet, fitnessScore);
-			}
-			else {
-				// Could not calculate
-				if (DEBUG) {
-					Console.WriteLine("Could not Calculate");
+					if (DEBUG) {Console.WriteLine ("Fitness Score = " + fitnessScore);}
+					scoredChromosomes.Add (chromosome.Key, fitnessScore);
+
+				} else {
+					// Could not calculate, 0 fitness
+					if (DEBUG) {Console.WriteLine ("Could not Calculate");}
+					scoredChromosomes.Add (chromosome.Key, 0f);
 				}
 			}
-			
-			return chromosomeSet;
+	
+			return scoredChromosomes;
 		}
 		
 		private string getChromosomeStringFromDictionary(Dictionary<string, float> chromosomeSet) {
@@ -65,22 +63,14 @@ namespace Evolutionary {
 			return "Did not find anything";
 		}
 		
-		// Probably do not ever need this
-//		private float getFitnessScoreFromDictionary(Dictionary<string, float> chromosomeSet) {
-//			foreach (KeyValuePair<string, float> pair in chromosomeSet) {
-//				return pair.Value;
-//			}
-//			return -1;
-//		}
-		
-		private List<string> getListOfFourDigitStringsFromDictionary(Dictionary<string, float> chromosomeSet) {
+		private List<string> getListOfFourDigitStringsFromChromosome(KeyValuePair<string, float> chromosome) {
 			List<string> fourDigitStrings = new List<string>();
-			string chromosome = getChromosomeStringFromDictionary(chromosomeSet);
+			string chromosomeString = chromosome.Key;
 			string temp = "";
 			
-			for (int i = 0; i < chromosome.Length; i += 4) {
-				temp = chromosome[i].ToString() + chromosome[i + 1].ToString() + 
-						chromosome[i + 2].ToString() + chromosome[i + 3].ToString();
+			for (int i = 0; i < chromosomeString.Length; i += 4) {
+				temp = chromosomeString[i].ToString() + chromosomeString[i + 1].ToString() + 
+						chromosomeString[i + 2].ToString() + chromosomeString[i + 3].ToString();
 				fourDigitStrings.Add(temp);
 			}
 			return fourDigitStrings;
