@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -25,9 +24,9 @@ namespace Evolutionary {
 	 * */
 
 	public class Decoder {
-		public Decoder() {
-		
-		}
+
+		public Decoder() {}
+
 		private const bool DEBUG = true;
 
 		MyParser myParser = new MyParser();

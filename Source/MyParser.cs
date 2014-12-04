@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 
 namespace Evolutionary {
-
 	public class MyParser {
 		
 		public MyParser() {}
