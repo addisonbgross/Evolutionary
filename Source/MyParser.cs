@@ -10,7 +10,7 @@ namespace Evolutionary {
 		public float Evaluate(string expression) {
 			#pragma warning disable
 			try {
-				return (float)new System.Data.DataTable ().Compute (expression, null);
+				return float.Parse(new System.Data.DataTable ().Compute (expression, null).ToString());
 			} catch(Exception e) {
 				//it's fine
 				return 0f;

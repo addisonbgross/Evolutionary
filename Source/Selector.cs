@@ -13,7 +13,7 @@ using System.Collections.Generic;
  * 		-if the killLevel is below zero break
  * 		-remove the current chromosome from the original set
  */
-namespace Selector {
+namespace Evolutionary {
 	public class Selector {
 		static List<KeyValuePair<int, String>> deathList = new List<KeyValuePair<int, String>> ();
 		static Random random = new Random();

@@ -41,7 +41,7 @@ namespace Evolutionary {
 			
 				if (isFitnessScoreCalculatable (fourDigitStrings)) {
 				
-					float fitnessScore = (float)1 / ((float)target - findFitnessScoreUsingFourDigitList (fourDigitStrings));
+					float fitnessScore = (float)1 / Math.Abs(target - findFitnessScoreUsingFourDigitList (fourDigitStrings));
 				
 					if (DEBUG) {Console.WriteLine ("Fitness Score = " + fitnessScore);}
 					scoredChromosomes.Add (chromosome.Key, fitnessScore);
@@ -82,7 +82,8 @@ namespace Evolutionary {
 			for (int i = 1; i < fourDigitList.Count; i++) {
 				runningTotal += getValueAsString(fourDigitList[i]);
 			}
-			return myParser.Evaluate(runningTotal);			
+			float f = myParser.Evaluate (runningTotal);
+			return f;			
 		}
 		
 		private string getValueAsString(string fourDigitChromosome) {

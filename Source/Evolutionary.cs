@@ -14,19 +14,20 @@ namespace Evolutionary
 			evo.SetSizeRequest (600,300);
 			evo.DeleteEvent += OnDeleteEvent;
 
-			Mutator m = new Mutator (12);
+			Mutator m = new Mutator (24);
 			Generator g = new Generator ();
 			GraphView v = new GraphView ();
 			Controller c = new Controller ();
 			Decoder d = new Decoder ();
+			Selector s = new Selector ();
 			HBox tBox = new HBox ();
 
 			//for testing purposes only
 			Dictionary<string, float> chromosomes = new Dictionary<string, float> ();
 			Boolean isNotUnique; //flag if dict already contains that chromosome
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 100; i++) {
 				do {
-					string newChromosome = g.generateChromosome (12);
+					string newChromosome = g.generateChromosome (24);
 					isNotUnique = chromosomes.ContainsKey(newChromosome);
 					if(!isNotUnique)
 						chromosomes.Add (newChromosome, (float)i / 10);
@@ -37,7 +38,8 @@ namespace Evolutionary
 			chromosomes = m.Mutate (chromosomes, 0.1f, 0.2f);
 			PrintChromosomes (chromosomes);
 
-			chromosomes = d.decode (5, chromosomes); //NOT WORKING
+			chromosomes = d.decode (5, chromosomes);
+			//s.Select (chromosomes, 0.5f);
 			v.SetValues (chromosomes);
 
 
