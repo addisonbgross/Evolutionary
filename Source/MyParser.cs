@@ -15,6 +15,7 @@ namespace Evolutionary {
 				//it's fine
 				return 0f;
 			}
+			#pragma warning restore
 		}
 	}
 }
