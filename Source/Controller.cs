@@ -10,6 +10,7 @@ namespace Evolutionary
 	{
 		Button startButton, resetButton, drawButton;
 		Entry mutationEntry, crossoverEntry, selectionEntry, chromosomeEntry;
+		HScale testScale = new HScale(null);
 		float mutationRate;
 		GraphView graphView;
 
@@ -51,7 +52,9 @@ namespace Evolutionary
 			inputBox2.Add (new Label ("Selection Rate"));
 			inputBox2.Add (selectionEntry);
 			inputBox2.Add (new Label ("Chromosome Length"));
-			inputBox2.Add (chromosomeEntry);
+			testScale.SetSizeRequest (10, 30);
+			inputBox2.Add (testScale);
+			//inputBox2.Add (chromosomeEntry);
 
 			buttonBox.Add (startButton);
 			buttonBox.Add (drawButton);
