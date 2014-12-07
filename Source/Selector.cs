@@ -17,16 +17,24 @@ namespace Evolutionary
 {
 	public class Selector 
 	{
-		static List<KeyValuePair<int, String>> deathList = new List<KeyValuePair<int, String>> ();
-		static Random random = new Random();
-		static float killLevel;
+		private List<KeyValuePair<int, String>> deathList = new List<KeyValuePair<int, String>> ();
+		private Random random = new Random();
+		private float killLevel;
+		private float killRate;
+		private float populationSize;
 
 		public Selector (){}
 
-		public void Select (Dictionary<string, float> chromosomes, float killRate) {
-		
+		public void setPopulationSize (int p)
+		{
+			populationSize = p;
+		}
+
+		public void Select (Dictionary<string, float> chromosomes) 
+		{
 			deathList.Clear();
 			killLevel = 0;
+			killRate = (chromosomes.Count - populationSize) / chromosomes.Count;
 
 			var keys = new List<string> (chromosomes.Keys);
 		
@@ -48,7 +56,8 @@ namespace Evolutionary
 			}
 		}
 
-		public int CustomSort(KeyValuePair<int, string> x, KeyValuePair<int, String> y) {
+		public int CustomSort(KeyValuePair<int, string> x, KeyValuePair<int, String> y) 
+		{
 			if (x.Key > y.Key)
 				return 1;
 			else if (y.Key < x.Key)
