@@ -10,8 +10,8 @@ namespace Evolutionary
 	{
 		Button startButton, resetButton, drawButton;
 		HScale mutationScale, crossoverScale, chromosomeScale;
-		double mutationRate, crossoverRate, chromosomeSize;
 		GraphView graphView;
+		Evolutionary evolutionary;
 
 		public Controller () {}
 		public VBox GetInterface() {
@@ -50,9 +50,17 @@ namespace Evolutionary
 		}
 		public void SendInput() {
 			if (startButton.Label == "Start") {
-				mutationRate = mutationScale.Value;
-				crossoverRate = crossoverScale.Value;
-				chromosomeSize = chromosomeScale.Value;
+				var m = (float)mutationScale.Value / 100;
+				var x = (float)crossoverScale.Value / 100;
+				var cw = (int)chromosomeScale.Value;
+				/*
+				evolutionary.SetVariables (
+					(float)mutationScale.Value / 100, 
+					(float)crossoverScale.Value / 100, 
+					(int)chromosomeScale.Value
+				);
+				evolutionary.DoEverything ();
+				*/
 				startButton.Label = "Stop";
 			} else {
 				//mutationScale.MoveSlider
@@ -74,6 +82,9 @@ namespace Evolutionary
 		}
 		public void ResetEvent(object obj, EventArgs args) {
 			ClearEntries ();
+		}
+		public void SetTarget (Evolutionary e) {
+			evolutionary = e;
 		}
 	}
 }

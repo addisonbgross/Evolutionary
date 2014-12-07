@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Evolutionary {
 
@@ -8,13 +9,16 @@ namespace Evolutionary {
 	public class Generator {
 		// this is used to generate random 1's and 0's later
 		static private Random randomNumber = new Random();
+		private int chromosomeLength;
 		
-		public Generator() {
-			// Do Nothing
-		}
+		public Generator() {}
 
 		private int getRandom0or1() {
 			return randomNumber.Next(0, 2);
+		}
+
+		public void setChromosomeLength(int length) {
+			chromosomeLength = length;
 		}
 		
 		private bool isMultipleOfFour(int input) {
@@ -29,12 +33,12 @@ namespace Evolutionary {
 		}
 		
 		// Generates a chromomsome with 8 digits.
-		public string generateChromosome() {
+		private string generateChromosome() {
 			return generateChromosome(8);
 		}
 		
 		// Generates the chromomsome.
-		public string generateChromosome(int chromosomeLength) {
+		private string generateChromosome(int chromosomeLength) {
 			chromosomeLength = roundUpToMultipleOfFour(chromosomeLength);
 			string randomChromosome = "";
 			for (int i = 0; i < chromosomeLength; i++) {
@@ -42,6 +46,21 @@ namespace Evolutionary {
 				randomChromosome += getRandom0or1();
 			}
 			return randomChromosome;
+		}
+
+		public Dictionary<string, float> GenerateChromosomeDictionary (int dictionarySize) {
+			Dictionary<string, float> chromosomes = new Dictionary<string, float> ();
+			Boolean isNotUnique; //flag if dict already contains that chromosome
+
+			for (int i = 0; i < dictionarySize; i++) {
+				do {
+					string newChromosome = generateChromosome (chromosomeLength);
+					isNotUnique = chromosomes.ContainsKey (newChromosome);
+					if (!isNotUnique)
+						chromosomes.Add (newChromosome, 0f);
+				} while (isNotUnique);
+			}
+			return chromosomes;
 		}
 	}
 }

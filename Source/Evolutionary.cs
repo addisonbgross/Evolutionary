@@ -7,6 +7,13 @@ namespace Evolutionary
 	public class Evolutionary : Gtk.Window
 	{
 		static int populationSize = 100;
+		private Mutator mutator = new Mutator ();
+		private Generator generator = new Generator ();
+		private Controller controller = new Controller ();
+		private GraphView graphView = new GraphView ();
+		private Decoder decoder = new Decoder ();
+		private Selector selector = new Selector ();
+		private Dictionary<string, float> chromosomes;
 
 		public Evolutionary () : base (WindowType.Toplevel) {}
 
@@ -16,39 +23,17 @@ namespace Evolutionary
 			evo.SetSizeRequest (600,300);
 			evo.DeleteEvent += OnDeleteEvent;
 
-			Mutator m = new Mutator ();
-			Generator g = new Generator ();
-			GraphView v = new GraphView ();
-			Controller c = new Controller ();
-			Decoder d = new Decoder ();
-			Selector s = new Selector ();
-			s.setPopulationSize (populationSize);
+			evo.SetVariables (0.3f, 0.4f, 16);
+
+			evo.controller.SetGraph (evo.graphView);
+			evo.controller.SetTarget (evo);
+			evo.selector.setPopulationSize (populationSize);
 			HBox tBox = new HBox ();
 
-			//for testing purposes only
-			Dictionary<string, float> chromosomes = new Dictionary<string, float> ();
-			Boolean isNotUnique; //flag if dict already contains that chromosome
-			for (int i = 0; i < populationSize; i++) {
-				do {
-					string newChromosome = g.generateChromosome (24);
-					isNotUnique = chromosomes.ContainsKey(newChromosome);
-					if(!isNotUnique)
-						chromosomes.Add (newChromosome, (float)i / 10);
-				} while (isNotUnique);
-			}
+			evo.DoEverything ();
 
-			PrintChromosomes (chromosomes);
-			m.Mutate (chromosomes);
-			PrintChromosomes (chromosomes);
-
-			chromosomes = d.decode (5, chromosomes);
-			//s.Select (chromosomes, 0.5f);
-			v.SetValues (chromosomes);
-
-
-			tBox.Add (c.GetInterface ());
-			tBox.Add (v.GetView());
-			c.SetGraph (v);
+			tBox.Add (evo.controller.GetInterface ());
+			tBox.Add (evo.graphView.GetView());
 			evo.Add (tBox);
 			evo.ShowAll ();
 			Application.Run ();
@@ -59,6 +44,21 @@ namespace Evolutionary
 		public static void PrintChromosomes(Dictionary<string, float> d) {
 			foreach (KeyValuePair<string, float> kvp in d)
 				Console.WriteLine(kvp.Key);
+		}
+		public void SetVariables(float mutationRate, float crossoverRate, int chromosomeLength) {
+			mutator.setMutationRate (mutationRate);
+			mutator.setCrossoverRate (crossoverRate);
+			generator.setChromosomeLength (chromosomeLength);
+		}
+		public void DoEverything () {
+			if (chromosomes == null) {
+				chromosomes = generator.GenerateChromosomeDictionary (populationSize);
+			}
+			mutator.Mutate (ref chromosomes);
+			mutator.Crossover (ref chromosomes);
+			decoder.Decode (5, ref chromosomes);
+			selector.Select (ref chromosomes);
+			graphView.SetValues (chromosomes);
 		}
 	}
 }

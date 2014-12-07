@@ -7,24 +7,23 @@ namespace Evolutionary
 	public class Mutator 
 	{
 		private Random r = new Random();
-		private int chromosomeMaxSize;
 		private float mutationRate;
 		private float crossoverRate;
 
 		public Mutator() {}
 
 		//must be called before Mutate or Crossover is called
-		public void setCrossoverRate(int crossover) 
+		public void setCrossoverRate(float crossover) 
 		{
 			crossoverRate = crossover;
 		}
 
-		public void setMutationRate(int mutation) 
+		public void setMutationRate(float mutation) 
 		{
 			mutationRate = mutation;
 		}
 
-		public void Crossover(Dictionary<string, float> chromosomeDictionary)
+		public void Crossover(ref Dictionary<string, float> chromosomeDictionary)
 		{
 			List<KeyValuePair<string, float>> chromosomeList = chromosomeDictionary.ToList ();
 			Dictionary<string, float> newChromosomeDictionary = new Dictionary<string, float> ();
@@ -58,7 +57,7 @@ namespace Evolutionary
 			chromosomeDictionary = newChromosomeDictionary;
 		}
 
-		public void Mutate(Dictionary<string, float> chromosomeDictionary)
+		public void Mutate(ref Dictionary<string, float> chromosomeDictionary)
 		{
 			List<KeyValuePair<string, float>> chromosomes = chromosomeDictionary.ToList ();
 
@@ -75,12 +74,12 @@ namespace Evolutionary
 				if (chromosomeKey [mutationPoint] == '0') {
 					tempChromo = chromosomeKey.ToCharArray ();
 					tempChromo [mutationPoint] = '1';
-					chromosomeKey = tempChromo.ToString ();
+					chromosomeKey = new string(tempChromo);
 					//chromosomeKey [mutationPoint] = '1';
 				} else {
 					tempChromo = chromosomeKey.ToCharArray ();
 					tempChromo [mutationPoint] = '0';
-					chromosomeKey = tempChromo.ToString ();
+					chromosomeKey = new string(tempChromo);
 				}
 				if (!chromosomeDictionary.ContainsKey (chromosomeKey)) //ensures no duplicates
 					chromosomeDictionary.Add (chromosomeKey, 0f);

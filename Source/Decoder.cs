@@ -31,7 +31,7 @@ namespace Evolutionary {
 
 		MyParser myParser = new MyParser();
 		
-		public Dictionary<string, float> decode(int target, Dictionary<string, float> chromosomeSet) {
+		public void Decode(int target, ref Dictionary<string, float> chromosomeSet) {
 
 			Dictionary<string, float> scoredChromosomes = new Dictionary<string, float> (); //temp
 
@@ -51,8 +51,7 @@ namespace Evolutionary {
 					scoredChromosomes.Add (chromosome.Key, 0f);
 				}
 			}
-	
-			return scoredChromosomes;
+			chromosomeSet = scoredChromosomes;
 		}
 		
 		private string getChromosomeStringFromDictionary(Dictionary<string, float> chromosomeSet) {
