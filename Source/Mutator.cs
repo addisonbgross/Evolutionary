@@ -38,7 +38,7 @@ namespace Evolutionary
 				chromosome1 = chromosomeList [(int)Math.Floor (chromosomeList.Count * r.NextDouble ())];
 				chromosome2 = chromosomeList [(int)Math.Floor (chromosomeList.Count * r.NextDouble ())];
 
-				int swapIndex = (int)Math.Ceiling (chromosome1.Key.Count * r.NextDouble ());
+				int swapIndex = (int)Math.Ceiling (chromosome1.Key.Length * r.NextDouble ());
 				string new1 = chromosome1.Key.Substring (0, swapIndex)
 				              + chromosome2.Key.Substring (swapIndex);
 				string new2 = chromosome2.Key.Substring (0, swapIndex)
@@ -61,7 +61,6 @@ namespace Evolutionary
 		public void Mutate(Dictionary<string, float> chromosomeDictionary)
 		{
 			List<KeyValuePair<string, float>> chromosomes = chromosomeDictionary.ToList ();
-			KeyValuePair<string, float> chromosome1;
 
 			int chromosomesToMutate = (int)Math.Ceiling (mutationRate * chromosomes.Count);
 
@@ -71,12 +70,18 @@ namespace Evolutionary
 				chromosomeDictionary.Remove (chromosomeKey);
 
 				//flip a bit of DNA
-				int mutationPoint = (int)Math.Floor (chromosomeKey.Count * r.NextDouble ());
-				if (chromosomeKey[mutationPoint] == "0")
-					chromosomeKey[mutationPoint] = "1";
-				else
-					chromosomeKey[mutationPoint] = "0";
-
+				char[] tempChromo;
+				int mutationPoint = (int)Math.Floor (chromosomeKey.Length * r.NextDouble ());
+				if (chromosomeKey [mutationPoint] == '0') {
+					tempChromo = chromosomeKey.ToCharArray ();
+					tempChromo [mutationPoint] = '1';
+					chromosomeKey = tempChromo.ToString ();
+					//chromosomeKey [mutationPoint] = '1';
+				} else {
+					tempChromo = chromosomeKey.ToCharArray ();
+					tempChromo [mutationPoint] = '0';
+					chromosomeKey = tempChromo.ToString ();
+				}
 				if (!chromosomeDictionary.ContainsKey (chromosomeKey)) //ensures no duplicates
 					chromosomeDictionary.Add (chromosomeKey, 0f);
 			}

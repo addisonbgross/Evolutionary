@@ -9,87 +9,57 @@ namespace Evolutionary
 	public class Controller
 	{
 		Button startButton, resetButton, drawButton;
-		Entry mutationEntry, crossoverEntry, selectionEntry, chromosomeEntry;
-		HScale testScale = new HScale(null);
-		float mutationRate;
+		HScale mutationScale, crossoverScale, chromosomeScale;
+		double mutationRate, crossoverRate, chromosomeSize;
 		GraphView graphView;
 
 		public Controller () {}
 		public VBox GetInterface() {
 			VBox box = new VBox(false, 0);
-			VBox inputBound = new VBox (false, 0);
-			VBox inputBox1 = new VBox (false, 0);
-			VBox inputBox2 = new VBox (false, 0);
+			VBox inputBox = new VBox (false, 0);
 			HBox buttonBox = new HBox (false, 0);
 
 			startButton = new Button ("Start");
-			startButton.Clicked += StartEvent;
-
 			drawButton = new Button ("Draw");
-			drawButton.Clicked += DrawEvent;
-
 			resetButton = new Button ("Reset");
+			startButton.Clicked += StartEvent;
+			drawButton.Clicked += DrawEvent;
 			resetButton.Clicked += ResetEvent;
 
-			mutationEntry = new Entry ();
-			mutationEntry.SetSizeRequest (10, 30);
-			mutationEntry.MaxLength = 10;
-			crossoverEntry = new Entry ();
-			crossoverEntry.SetSizeRequest (10, 30);
-			crossoverEntry.MaxLength = 10;
-			selectionEntry = new Entry ();
-			selectionEntry.SetSizeRequest (10, 30);
-			selectionEntry.MaxLength = 10;
-			chromosomeEntry = new Entry ();
-			chromosomeEntry.SetSizeRequest (10, 30);
-			chromosomeEntry.MaxLength = 10;
+			mutationScale = new HScale(0, 100, 1);
+			crossoverScale = new HScale(0, 100, 1);
+			chromosomeScale = new HScale(0, 100, 4);
+			chromosomeScale.SetIncrements(4, 4);
 
-			inputBox1.Add (new Label ("Mutation Rate"));
-			inputBox1.Add (mutationEntry);
-			inputBox1.Add (new Label ("Crossover Rate"));
-			inputBox1.Add (crossoverEntry);
-
-			inputBox2.Add (new Label ("Selection Rate"));
-			inputBox2.Add (selectionEntry);
-			inputBox2.Add (new Label ("Chromosome Length"));
-			testScale.SetSizeRequest (10, 30);
-			inputBox2.Add (testScale);
-			//inputBox2.Add (chromosomeEntry);
+			inputBox.Add (new Label ("Mutation Rate"));
+			inputBox.Add (mutationScale);
+			inputBox.Add (new Label ("Crossover Rate"));
+			inputBox.Add (crossoverScale);
+			inputBox.Add (new Label ("Chromosome Length"));
+			inputBox.Add (chromosomeScale);
 
 			buttonBox.Add (startButton);
 			buttonBox.Add (drawButton);
 			buttonBox.Add (resetButton);
 
-			inputBound.Add (inputBox1);
-			inputBound.Add (inputBox2);
-
 			box.BorderWidth = 10;
-			//box.Add (inputBox1);
-			//box.Add (inputBox2);
-			box.Add (inputBound);
+			box.Add (inputBox);
 			box.Add (buttonBox);
 			box.Show (); 
 			return box;
 		}
 		public void SendInput() {
 			if (startButton.Label == "Start") {
-				//testing
-				if (!float.TryParse (mutationEntry.Text, out mutationRate))
-					mutationEntry.Text = "Enter a decimal number between 0 and 1";
-				else if (mutationRate < 0f || mutationRate > 1.0f)
-					mutationEntry.Text = "Enter a decimal number between 0 and 1";
-				Console.WriteLine (mutationEntry.Text);
-				Console.WriteLine (crossoverEntry.Text);
-				Console.WriteLine (selectionEntry.Text);
-				Console.WriteLine (chromosomeEntry.Text);
+				mutationRate = mutationScale.Value;
+				crossoverRate = crossoverScale.Value;
+				chromosomeSize = chromosomeScale.Value;
 				startButton.Label = "Stop";
-			}
-			else
+			} else {
+				//mutationScale.MoveSlider
 				startButton.Label = "Start";
+			}
 		}
 		public void ClearEntries() {
-			mutationEntry.Text = "";
-			crossoverEntry.Text = "";
 			startButton.Label = "Start";
 		}
 		public void StartEvent(object obj, EventArgs args) {

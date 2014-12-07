@@ -6,6 +6,8 @@ namespace Evolutionary
 {
 	public class Evolutionary : Gtk.Window
 	{
+		static int populationSize = 100;
+
 		public Evolutionary () : base (WindowType.Toplevel) {}
 
 		public static void Main() {
@@ -14,18 +16,19 @@ namespace Evolutionary
 			evo.SetSizeRequest (600,300);
 			evo.DeleteEvent += OnDeleteEvent;
 
-			Mutator m = new Mutator (24);
+			Mutator m = new Mutator ();
 			Generator g = new Generator ();
 			GraphView v = new GraphView ();
 			Controller c = new Controller ();
 			Decoder d = new Decoder ();
 			Selector s = new Selector ();
+			s.setPopulationSize (populationSize);
 			HBox tBox = new HBox ();
 
 			//for testing purposes only
 			Dictionary<string, float> chromosomes = new Dictionary<string, float> ();
 			Boolean isNotUnique; //flag if dict already contains that chromosome
-			for (int i = 0; i < 100; i++) {
+			for (int i = 0; i < populationSize; i++) {
 				do {
 					string newChromosome = g.generateChromosome (24);
 					isNotUnique = chromosomes.ContainsKey(newChromosome);
@@ -35,7 +38,7 @@ namespace Evolutionary
 			}
 
 			PrintChromosomes (chromosomes);
-			chromosomes = m.Mutate (chromosomes, 0.1f, 0.2f);
+			m.Mutate (chromosomes);
 			PrintChromosomes (chromosomes);
 
 			chromosomes = d.decode (5, chromosomes);
