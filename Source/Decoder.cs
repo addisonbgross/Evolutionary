@@ -82,14 +82,6 @@ namespace Evolutionary {
 				runningTotal += getValueAsString(fourDigitList[i]);
 			}
 			float f = myParser.Evaluate (runningTotal);
-			if (DEBUG) {
-				Console.WriteLine ("P: " + myParser.Evaluate (runningTotal));
-				Console.WriteLine ("P: " + myParser.Evaluate (runningTotal));
-				Console.WriteLine ("P: " + myParser.Evaluate (runningTotal));
-				Console.WriteLine ("P: " + myParser.Evaluate (runningTotal));
-				Console.WriteLine ("P: " + myParser.Evaluate (runningTotal));
-				Console.WriteLine ("P: " + myParser.Evaluate (runningTotal));
-			}
 			return f;			
 		}
 		
