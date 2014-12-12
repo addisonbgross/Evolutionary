@@ -40,7 +40,7 @@ namespace Evolutionary {
 			
 				if (isFitnessScoreCalculatable (fourDigitStrings)) {
 				
-					float fitnessScore = (float)1 / Math.Abs(target - findFitnessScoreUsingFourDigitList (fourDigitStrings));
+					float fitnessScore = (float)1 / (1 + Math.Abs(target - findFitnessScoreUsingFourDigitList (fourDigitStrings)));
 				
 					if (DEBUG) {Console.WriteLine ("Fitness Score = " + fitnessScore);}
 					scoredChromosomes.Add (chromosome.Key, fitnessScore);

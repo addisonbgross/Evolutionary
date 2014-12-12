@@ -53,14 +53,15 @@ namespace Evolutionary
 				var m = (float)mutationScale.Value / 100;
 				var x = (float)crossoverScale.Value / 100;
 				var cw = (int)chromosomeScale.Value;
-				/*
+
 				evolutionary.SetVariables (
 					(float)mutationScale.Value / 100, 
 					(float)crossoverScale.Value / 100, 
 					(int)chromosomeScale.Value
 				);
 				evolutionary.DoEverything ();
-				*/
+				if (graphView != null)
+					graphView.ReDraw ();
 				startButton.Label = "Stop";
 			} else {
 				//mutationScale.MoveSlider

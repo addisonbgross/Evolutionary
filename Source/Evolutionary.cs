@@ -30,7 +30,7 @@ namespace Evolutionary
 			evo.selector.setPopulationSize (populationSize);
 			HBox tBox = new HBox ();
 
-			evo.DoEverything ();
+			//evo.DoEverything ();
 
 			tBox.Add (evo.controller.GetInterface ());
 			tBox.Add (evo.graphView.GetView());
