@@ -66,7 +66,7 @@ namespace Evolutionary
 			for (; chromosomesToMutate > 0; chromosomesToMutate--) 
 			{
 				string chromosomeKey = chromosomes [(int)Math.Floor (chromosomes.Count * r.NextDouble ())].Key;
-				chromosomeDictionary.Remove (chromosomeKey);
+				//chromosomeDictionary.Remove (chromosomeKey);
 
 				//flip a bit of DNA
 				char[] tempChromo;
