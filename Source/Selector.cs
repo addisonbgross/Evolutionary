@@ -34,17 +34,17 @@ namespace Evolutionary
 
 			if (!allFullyEvolved) {
 				deathList.Sort (CustomSort);
-				int ringIterator = 0;
+				int ringCounter = 0;
 
 				while (chromosomesKilled < killQuota) {
-					KeyValuePair<int, String> kvp = deathList[ringIterator];
+					KeyValuePair<int, String> kvp = deathList[ringCounter];
 					if ((float)random.NextDouble () > chromosomes [kvp.Value]) {
 						chromosomes.Remove (kvp.Value);
 						deathList.Remove (kvp);
 						chromosomesKilled++;
 					}
-					ringIterator++;
-					ringIterator %= deathList.Count;
+					ringCounter++;
+					ringCounter %= deathList.Count;
 				}
 			}
 		}

@@ -23,14 +23,10 @@ namespace Evolutionary
 			evo.SetSizeRequest (600,300);
 			evo.DeleteEvent += OnDeleteEvent;
 
-			evo.SetVariables (0.3f, 0.4f, 16);
-
 			evo.controller.SetGraph (evo.graphView);
 			evo.controller.SetTarget (evo);
 			evo.selector.setPopulationSize (populationSize);
 			HBox tBox = new HBox ();
-
-			//evo.DoEverything ();
 
 			tBox.Add (evo.controller.GetInterface ());
 			tBox.Add (evo.graphView.GetView());
@@ -56,7 +52,7 @@ namespace Evolutionary
 			}
 			mutator.Mutate (ref chromosomes);
 			mutator.Crossover (ref chromosomes);
-			decoder.Decode (5, ref chromosomes);
+			decoder.Decode (12, ref chromosomes);
 			selector.Select (ref chromosomes);
 			graphView.SetValues (chromosomes);
 		}

@@ -1,19 +1,23 @@
 using System;
 using Gtk;
+using System.Timers;
 
-//TODO decouple the graphView from the Controller somehow
 using System.Collections.Generic;
 
 namespace Evolutionary 
 {
 	public class Controller
 	{
+		Timer timer;
 		Button startButton, resetButton, drawButton;
 		HScale mutationScale, crossoverScale, chromosomeScale;
 		GraphView graphView;
 		Evolutionary evolutionary;
 
-		public Controller () {}
+		public Controller () {
+			timer = new Timer(250);
+			timer.Elapsed += new ElapsedEventHandler (TimerEvent);
+		}
 		public VBox GetInterface() {
 			VBox box = new VBox(false, 0);
 			VBox inputBox = new VBox (false, 0);
@@ -48,6 +52,12 @@ namespace Evolutionary
 			box.Show (); 
 			return box;
 		}
+		private void TimerEvent(object sender, ElapsedEventArgs e) {
+			if (evolutionary != null)
+				evolutionary.DoEverything ();
+			if (graphView != null)
+				graphView.ReDraw ();
+		}
 		public void SendInput() {
 			if (startButton.Label == "Start") {
 				var m = (float)mutationScale.Value / 100;
@@ -59,12 +69,13 @@ namespace Evolutionary
 					(float)crossoverScale.Value / 100, 
 					(int)chromosomeScale.Value
 				);
-				evolutionary.DoEverything ();
-				if (graphView != null)
-					graphView.ReDraw ();
+				timer.Enabled = true;
+				timer.Start();
 				startButton.Label = "Stop";
 			} else {
 				//mutationScale.MoveSlider
+				timer.Enabled = false;
+				timer.Stop ();
 				startButton.Label = "Start";
 			}
 		}
