@@ -24,10 +24,8 @@ namespace Evolutionary
 			HBox buttonBox = new HBox (false, 0);
 
 			startButton = new Button ("Start");
-			drawButton = new Button ("Draw");
 			resetButton = new Button ("Reset");
 			startButton.Clicked += StartEvent;
-			drawButton.Clicked += DrawEvent;
 			resetButton.Clicked += ResetEvent;
 
 			mutationScale = new HScale(0, 100, 1);
@@ -43,7 +41,6 @@ namespace Evolutionary
 			inputBox.Add (chromosomeScale);
 
 			buttonBox.Add (startButton);
-			buttonBox.Add (drawButton);
 			buttonBox.Add (resetButton);
 
 			box.BorderWidth = 10;
@@ -55,8 +52,8 @@ namespace Evolutionary
 		private void TimerEvent(object sender, ElapsedEventArgs e) {
 			if (evolutionary != null)
 				evolutionary.DoEverything ();
-			if (graphView != null)
-				graphView.ReDraw ();
+			//if (graphView != null)
+			//	graphView.ReDraw ();
 		}
 		public void SendInput() {
 			if (startButton.Label == "Start") {
@@ -74,13 +71,10 @@ namespace Evolutionary
 				startButton.Label = "Stop";
 			} else {
 				//mutationScale.MoveSlider
-				timer.Enabled = false;
 				timer.Stop ();
+				timer.Enabled = false;
 				startButton.Label = "Start";
 			}
-		}
-		public void ClearEntries() {
-			startButton.Label = "Start";
 		}
 		public void StartEvent(object obj, EventArgs args) {
 			SendInput ();
@@ -93,7 +87,10 @@ namespace Evolutionary
 			this.graphView = gv;
 		}
 		public void ResetEvent(object obj, EventArgs args) {
-			ClearEntries ();
+			timer.Stop ();
+			timer.Enabled = false;
+			startButton.Label = "Start";
+			evolutionary.Reset ();
 		}
 		public void SetTarget (Evolutionary e) {
 			evolutionary = e;

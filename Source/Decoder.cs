@@ -27,7 +27,7 @@ namespace Evolutionary {
 
 		public Decoder() {}
 
-		private const bool DEBUG = true;
+		private const bool DEBUG = false;
 
 		MyParser myParser = new MyParser();
 		

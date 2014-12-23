@@ -1,6 +1,7 @@
 ﻿using System;
 using Gtk;
 using Cairo;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace Evolutionary
@@ -10,15 +11,16 @@ namespace Evolutionary
 		private Cairo.Context cr;
 		private int width, height;
 		private DrawingArea graph = new DrawingArea ();
-		private Dictionary<string, float> graphValues;
+		private ConcurrentDictionary<string, float> graphValues = new ConcurrentDictionary<string, float> ();
 
-		public GraphView () {}
+		public GraphView () {
+			graph.ExposeEvent += OnExpose;
+		}
 
 		public DrawingArea GetView() {
-			graph.ExposeEvent += OnExpose;
 			return graph;
 		}
-		//drawing the bar chart, random for now
+		//drawing the bar chart
 		public void OnExpose(object sender, ExposeEventArgs args){
 			DrawingArea area = (DrawingArea)sender;
 			cr = Gdk.CairoHelper.Create(area.GdkWindow);
@@ -31,7 +33,7 @@ namespace Evolutionary
 			cr.Fill ();
 
 			//draw graph if not null
-			if (graphValues != null) {
+			if (graphValues.Count > 0) {
 				double barWidth = (double)width / graphValues.Count;
 				double currentX = 0;
 				//color gradient from pink -> cyan
@@ -54,7 +56,12 @@ namespace Evolutionary
 			graph.QueueDraw ();
 		}
 		public void SetValues(Dictionary<string, float> values) {
-			graphValues = values;
+			graphValues.Clear ();
+			foreach(KeyValuePair<string, float> kvp in values)
+				graphValues.TryAdd(kvp.Key, kvp.Value);
+		}
+		public void Clear () {
+			graphValues.Clear ();
 		}
 	}
 }

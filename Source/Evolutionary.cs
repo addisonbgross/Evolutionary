@@ -46,6 +46,12 @@ namespace Evolutionary
 			mutator.setCrossoverRate (crossoverRate);
 			generator.setChromosomeLength (chromosomeLength);
 		}
+		public void Reset ()
+		{
+			graphView.Clear ();
+			graphView.ReDraw ();
+			chromosomes = null;
+		}
 		public void DoEverything () {
 			if (chromosomes == null) {
 				chromosomes = generator.GenerateChromosomeDictionary (populationSize);
@@ -55,6 +61,7 @@ namespace Evolutionary
 			decoder.Decode (12, ref chromosomes);
 			selector.Select (ref chromosomes);
 			graphView.SetValues (chromosomes);
+			graphView.ReDraw ();
 		}
 	}
 }
