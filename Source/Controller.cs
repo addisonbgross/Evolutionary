@@ -9,7 +9,7 @@ namespace Evolutionary
 	public class Controller
 	{
 		Timer timer;
-		Button startButton, resetButton, drawButton;
+		Button startButton, resetButton;
 		HScale mutationScale, crossoverScale, chromosomeScale;
 		GraphView graphView;
 		Evolutionary evolutionary;

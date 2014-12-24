@@ -9,12 +9,13 @@ namespace Evolutionary
 	public class GraphView
 	{
 		private Cairo.Context cr;
-		private int width, height;
+		private int width, height, xLabelHeight = 20, yLabelWidth = 20;
 		private DrawingArea graph = new DrawingArea ();
 		private ConcurrentDictionary<string, float> graphValues = new ConcurrentDictionary<string, float> ();
 
 		public GraphView () {
 			graph.ExposeEvent += OnExpose;
+			graph.WidthRequest = 200;
 		}
 
 		public DrawingArea GetView() {
@@ -32,16 +33,16 @@ namespace Evolutionary
 			cr.SetSourceRGB (0, 0, 0);
 			cr.Fill ();
 
-			//draw graph if not null
+			//draw graph
 			if (graphValues.Count > 0) {
-				double barWidth = (double)width / graphValues.Count;
-				double currentX = 0;
+				double barWidth = (double)(width - yLabelWidth) / graphValues.Count;
+				double currentX = yLabelWidth;
 				//color gradient from pink -> cyan
 				double incR = -1.0 / graphValues.Count, incG = 1.0 / graphValues.Count;
 				double R = 1, G = 0, B = 1; 
 
 				foreach (KeyValuePair<string, float> kvp in graphValues) {
-					cr.Rectangle (currentX, height, barWidth, -(height * kvp.Value));
+					cr.Rectangle (currentX, height - xLabelHeight, barWidth, -(height * kvp.Value));
 					cr.StrokePreserve ();
 					cr.SetSourceRGB (R, G, B);
 					R += incR;
@@ -50,6 +51,23 @@ namespace Evolutionary
 					currentX += barWidth;
 				}
 			}
+			cr.SetSourceRGB (1, 1, 1);
+			cr.LineWidth = 2;
+			cr.MoveTo (yLabelWidth, 0);
+			cr.LineTo (yLabelWidth, height - xLabelHeight);
+			cr.LineTo (width, height - xLabelHeight);
+			cr.Stroke ();
+
+			cr.SelectFontFace ("helvetica", FontSlant.Normal, FontWeight.Bold);
+			cr.SetFontSize (14.0);
+			cr.SetSourceRGB (1, 1, 1);
+
+			cr.MoveTo (width / 2 - 50, height - 4);
+			cr.ShowText ("Chromosomes");
+			cr.MoveTo (14, height / 2 + 30);
+			cr.Rotate (-Math.PI / 2);
+			cr.ShowText ("Fitness score");
+
 			cr.Dispose ();
 		}
 		public void ReDraw() {

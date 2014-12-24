@@ -6,7 +6,7 @@ namespace Evolutionary
 {
 	public class Evolutionary : Gtk.Window
 	{
-		static int populationSize = 100;
+		private static int populationSize = 100;
 		private Mutator mutator = new Mutator ();
 		private Generator generator = new Generator ();
 		private Controller controller = new Controller ();
@@ -15,12 +15,18 @@ namespace Evolutionary
 		private Selector selector = new Selector ();
 		private Dictionary<string, float> chromosomes;
 
-		public Evolutionary () : base (WindowType.Toplevel) {}
+		public Evolutionary () : base (WindowType.Toplevel) {
+			var os = System.Environment.OSVersion;
+			var slash = (os.ToString().Contains("Windows"))? "\\": "/";
+			var path = ".." + slash + ".." + slash + "res" + slash + "icon.jpg";
+			var icon = new Gdk.Pixbuf (path);
+			Icon = icon;
+		}
 
 		public static void Main() {
 			Application.Init ();
 			Evolutionary evo = new Evolutionary();
-			evo.SetSizeRequest (600,300);
+			evo.SetSizeRequest (500,300);
 			evo.DeleteEvent += OnDeleteEvent;
 
 			evo.controller.SetGraph (evo.graphView);
@@ -46,8 +52,7 @@ namespace Evolutionary
 			mutator.setCrossoverRate (crossoverRate);
 			generator.setChromosomeLength (chromosomeLength);
 		}
-		public void Reset ()
-		{
+		public void Reset () {
 			graphView.Clear ();
 			graphView.ReDraw ();
 			chromosomes = null;
