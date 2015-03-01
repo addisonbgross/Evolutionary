@@ -19,8 +19,8 @@ namespace Evolutionary
 			var os = System.Environment.OSVersion;
 			var slash = (os.ToString().Contains("Windows"))? "\\": "/";
 			var path = ".." + slash + ".." + slash + "res" + slash + "icon.jpg";
-			var icon = new Gdk.Pixbuf (path);
-			Icon = icon;
+			// var icon = new Gdk.Pixbuf (path);
+			// Icon = icon;
 		}
 
 		public static void Main() {
