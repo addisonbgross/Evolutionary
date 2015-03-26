@@ -10,7 +10,7 @@ namespace Evolutionary {
 		// this is used to generate random 1's and 0's later
 		static private Random randomNumber = new Random();
 		private int chromosomeLength;
-		
+
 		public Generator() {}
 
 		private int getRandom0or1() {
@@ -20,10 +20,10 @@ namespace Evolutionary {
 		public void setChromosomeLength(int length) {
 			chromosomeLength = length;
 		}
-		
+
 		private bool isMultipleOfFour(int input) {
 			return (input % 4 == 0);
-		}	
+		}
 
 		private int roundUpToMultipleOfFour(int input) {
 			while(!isMultipleOfFour(input)) {
@@ -31,12 +31,12 @@ namespace Evolutionary {
 			}
 			return input;
 		}
-		
+
 		// Generates a chromomsome with 8 digits.
 		private string generateChromosome() {
 			return generateChromosome(8);
 		}
-		
+
 		// Generates the chromomsome.
 		private string generateChromosome(int chromosomeLength) {
 			chromosomeLength = roundUpToMultipleOfFour(chromosomeLength);

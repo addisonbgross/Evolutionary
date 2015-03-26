@@ -3,7 +3,7 @@ using System.Data;
 
 namespace Evolutionary {
 	public class MyParser {
-		
+
 		public MyParser() {}
 
 		public float Evaluate(string expression) {

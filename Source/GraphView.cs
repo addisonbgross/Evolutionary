@@ -39,7 +39,7 @@ namespace Evolutionary
 				double currentX = yLabelWidth;
 				//color gradient from pink -> cyan
 				double incR = -1.0 / graphValues.Count, incG = 1.0 / graphValues.Count;
-				double R = 1, G = 0, B = 1; 
+				double R = 1, G = 0, B = 1;
 
 				foreach (KeyValuePair<string, float> kvp in graphValues) {
 					cr.Rectangle (currentX, height - xLabelHeight, barWidth, -(height * kvp.Value));

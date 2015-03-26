@@ -4,7 +4,7 @@ using System.Timers;
 
 using System.Collections.Generic;
 
-namespace Evolutionary 
+namespace Evolutionary
 {
 	public class Controller
 	{
@@ -46,7 +46,7 @@ namespace Evolutionary
 			box.BorderWidth = 10;
 			box.Add (inputBox);
 			box.Add (buttonBox);
-			box.Show (); 
+			box.Show ();
 			return box;
 		}
 		private void TimerEvent(object sender, ElapsedEventArgs e) {
@@ -62,8 +62,8 @@ namespace Evolutionary
 				var cw = (int)chromosomeScale.Value;
 
 				evolutionary.SetVariables (
-					(float)mutationScale.Value / 100, 
-					(float)crossoverScale.Value / 100, 
+					(float)mutationScale.Value / 100,
+					(float)crossoverScale.Value / 100,
 					(int)chromosomeScale.Value
 				);
 				timer.Enabled = true;

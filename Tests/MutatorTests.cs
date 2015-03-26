@@ -24,7 +24,7 @@ namespace Tests
 		public void testMutation() {
 			String chromo1 = "00001111";
 			String chromo2 = "11110000";
-		
+
 			mutator.Mutate (chromo1, 1.0);
 			mutator.Mutate (chromo2, 1.0);
 

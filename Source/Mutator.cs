@@ -2,9 +2,9 @@
 using System;
 using System.Linq;
 
-namespace Evolutionary 
+namespace Evolutionary
 {
-	public class Mutator 
+	public class Mutator
 	{
 		private Random r = new Random();
 		private float mutationRate;
@@ -13,12 +13,12 @@ namespace Evolutionary
 		public Mutator() {}
 
 		//must be called before Mutate or Crossover is called
-		public void setCrossoverRate(float crossover) 
+		public void setCrossoverRate(float crossover)
 		{
 			crossoverRate = crossover;
 		}
 
-		public void setMutationRate(float mutation) 
+		public void setMutationRate(float mutation)
 		{
 			mutationRate = mutation;
 		}
@@ -32,7 +32,7 @@ namespace Evolutionary
 
 			int pairsToCrossover = (int)Math.Ceiling (crossoverRate * chromosomeList.Count) / 2;
 
-			for (; pairsToCrossover > 0; pairsToCrossover--) 
+			for (; pairsToCrossover > 0; pairsToCrossover--)
 			{
 				chromosome1 = chromosomeList [(int)Math.Floor (chromosomeList.Count * r.NextDouble ())];
 				chromosome2 = chromosomeList [(int)Math.Floor (chromosomeList.Count * r.NextDouble ())];
@@ -63,7 +63,7 @@ namespace Evolutionary
 
 			int chromosomesToMutate = (int)Math.Ceiling (mutationRate * chromosomes.Count);
 
-			for (; chromosomesToMutate > 0; chromosomesToMutate--) 
+			for (; chromosomesToMutate > 0; chromosomesToMutate--)
 			{
 				string chromosomeKey = chromosomes [(int)Math.Floor (chromosomes.Count * r.NextDouble ())].Key;
 				//chromosomeDictionary.Remove (chromosomeKey);

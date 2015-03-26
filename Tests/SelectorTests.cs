@@ -17,7 +17,7 @@ namespace Test
 			string s = "000";
 			for (int i = 0; i < 100; ++i)
 				dictionary.Add(s += "1", 1.0f);
-			
+
 			selector.Select (dictionary, 1.0f);
 
 			Assert.AreEqual (true, dictionary.Count == 0);
